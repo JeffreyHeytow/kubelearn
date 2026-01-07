@@ -1,0 +1,240 @@
+.tutorial-page {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.tutorial-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.back-button {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 0.5rem 1.5rem;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-bottom: 2rem;
+    transition: all 0.3s;
+}
+
+.back-button:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateX(-5px);
+}
+
+.tutorial-content {
+    background: white;
+    border-radius: 10px;
+    padding: 3rem;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+}
+
+.tutorial-content h1 {
+    color: #667eea;
+    margin-top: 0;
+    margin-bottom: 2rem;
+    font-size: 2.5rem;
+}
+
+.tutorial-content h2 {
+    color: #764ba2;
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+    font-size: 1.8rem;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 0.5rem;
+}
+
+.tutorial-content h3 {
+    color: #667eea;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    font-size: 1.4rem;
+}
+
+.tutorial-content p {
+    line-height: 1.8;
+    color: #333;
+    margin-bottom: 1rem;
+}
+
+.tutorial-content ul,
+.tutorial-content ol {
+    line-height: 1.8;
+    color: #333;
+    margin-bottom: 1.5rem;
+    padding-left: 2rem;
+}
+
+.tutorial-content li {
+    margin-bottom: 0.5rem;
+}
+
+.tutorial-content pre {
+    background: #2d2d2d;
+    color: #f8f8f2;
+    padding: 1.5rem;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin: 1.5rem 0;
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+.tutorial-content code {
+    font-family: 'Courier New', monospace;
+    background: #f4f4f4;
+    padding: 0.2rem 0.4rem;
+    border-radius: 3px;
+    font-size: 0.9em;
+    color: #e83e8c;
+}
+
+.tutorial-content pre code {
+    background: none;
+    padding: 0;
+    color: #f8f8f2;
+}
+
+.tutorial-content strong {
+    color: #667eea;
+    font-weight: 600;
+}
+
+.tutorial-content .mermaid {
+    background: #f8f9ff;
+    padding: 2rem;
+    border-radius: 8px;
+    margin: 2rem 0;
+    text-align: center;
+    border: 2px solid #e0e6ff;
+}
+
+/* Make mermaid diagrams responsive */
+.tutorial-content .mermaid svg {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Tutorial navigation */
+.tutorial-navigation {
+    margin-top: 4rem;
+    margin-bottom: 3rem;
+    padding: 2.5rem 0 1rem 0;
+    border-top: 3px solid #eee;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.tutorial-nav-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+
+.nav-button {
+    padding: 1.2rem 2.5rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1);
+    min-width: 200px;
+}
+
+.prev-button {
+    background: white;
+    color: #667eea;
+    border: 2px solid #667eea;
+    justify-self: start;
+}
+
+.prev-button:hover {
+    background: #667eea;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.3);
+}
+
+.next-button {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    justify-self: end;
+}
+
+.next-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(102, 126, 234, 0.4);
+}
+
+.playground-button {
+    background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+    color: white;
+    padding: 1.4rem 3rem;
+    font-size: 1.2rem;
+    align-self: center;
+    min-width: 300px;
+}
+
+.playground-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(17, 153, 142, 0.4);
+}
+
+/* When only one tutorial nav button exists */
+.tutorial-nav-buttons:has(.next-button:only-child) {
+    grid-template-columns: 1fr;
+    justify-items: end;
+}
+
+.tutorial-nav-buttons:has(.prev-button:only-child) {
+    grid-template-columns: 1fr;
+    justify-items: start;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    .tutorial-container {
+        padding: 1rem;
+    }
+
+    .tutorial-content {
+        padding: 1.5rem;
+    }
+
+    .tutorial-content h1 {
+        font-size: 2rem;
+    }
+
+    .tutorial-content h2 {
+        font-size: 1.5rem;
+    }
+
+    .tutorial-content pre {
+        padding: 1rem;
+        font-size: 0.8rem;
+    }
+
+    .tutorial-nav-buttons {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .nav-button {
+        justify-self: stretch !important;
+        min-width: unset;
+        width: 100%;
+    }
+
+    .playground-button {
+        min-width: unset;
+        width: 100%;
+    }
+}
