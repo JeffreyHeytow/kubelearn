@@ -42,11 +42,15 @@
   border-radius: 10px;
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.2);
-  transition: transform 0.3s ease;
+  transition: all 0.3s ease;
+  cursor: pointer;
 }
 
 .feature:hover {
   transform: translateY(-5px);
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.4);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
 }
 
 .feature h3 {
@@ -56,22 +60,4 @@
 
 .feature p {
   opacity: 0.9;
-}
-
-.cta-button {
-  background: white;
-  color: #667eea;
-  border: none;
-  padding: 1rem 3rem;
-  font-size: 1.2rem;
-  font-weight: bold;
-  border-radius: 50px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-}
-
-.cta-button:hover {
-  transform: scale(1.05);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
 }

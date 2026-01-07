@@ -521,8 +521,8 @@ export default function Tutorial() {
           <h2 onClick={() => navigate('/')}>KubeLearn</h2>
           <div className="nav-links">
             <span onClick={() => navigate('/tutorials')}>Tutorials</span>
-            <span>Playground</span>
-            <span>Generator</span>
+            <span onClick={() => alert('Playground coming soon!')}>Playground</span>
+            <span onClick={() => alert('Generator coming soon!')}>Generator</span>
           </div>
         </nav>
         <div className="tutorial-container">
@@ -539,8 +539,8 @@ export default function Tutorial() {
         <h2 onClick={() => navigate('/')}>KubeLearn</h2>
         <div className="nav-links">
           <span onClick={() => navigate('/tutorials')}>Tutorials</span>
-          <span>Playground</span>
-          <span>Generator</span>
+          <span onClick={() => alert('Playground coming soon!')}>Playground</span>
+          <span onClick={() => alert('Generator coming soon!')}>Generator</span>
         </div>
       </nav>
       
