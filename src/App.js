@@ -11,10 +11,10 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/tutorials" element={<Tutorials />} />
-        <Route path="/tutorial/:id" element={<Tutorial />} />
+        <Route path="/tutorial/:slug" element={<Tutorial />} />
       </Routes>
     </BrowserRouter>
   );
 }
 
-export { App as default };
+export default App;
