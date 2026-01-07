@@ -1,22 +1,27 @@
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <h1>KubeLearn</h1>
+        <p>Master Kubernetes through interactive tutorials, hands-on practice, and AI-powered configuration generation</p>
+        <div className="features">
+          <div className="feature">
+            <h3>📚 Learn</h3>
+            <p>Step-by-step tutorials with visual diagrams</p>
+          </div>
+          <div className="feature">
+            <h3>🎮 Practice</h3>
+            <p>Interactive YAML playground</p>
+          </div>
+          <div className="feature">
+            <h3>🤖 Generate</h3>
+            <p>AI-powered config creation</p>
+          </div>
+        </div>
+        <button className="cta-button">Get Started</button>
       </header>
     </div>
   );
