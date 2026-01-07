@@ -1,11 +1,11 @@
 const tutorial = {
-  id: 2,
-  slug: 'understanding-pods',
-  title: 'Understanding Pods',
-  description: 'Deep dive into Kubernetes Pods',
-  duration: '15 min',
-  difficulty: 'Beginner',
-  content: `
+    id: 2,
+    slug: 'understanding-pods',
+    title: 'Understanding Pods',
+    description: 'Deep dive into Kubernetes Pods',
+    duration: '15 min',
+    difficulty: 'Beginner',
+    content: `
 # Understanding Kubernetes Pods
 
 ## What is a Pod?

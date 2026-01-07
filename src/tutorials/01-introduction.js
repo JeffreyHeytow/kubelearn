@@ -1,11 +1,11 @@
 const tutorial = {
-  id: 1,
-  slug: 'introduction-to-kubernetes',
-  title: 'Introduction to Kubernetes',
-  description: 'Learn the basics of Kubernetes architecture',
-  duration: '10 min',
-  difficulty: 'Beginner',
-  content: `
+    id: 1,
+    slug: 'introduction-to-kubernetes',
+    title: 'Introduction to Kubernetes',
+    description: 'Learn the basics of Kubernetes architecture',
+    duration: '10 min',
+    difficulty: 'Beginner',
+    content: `
 # Introduction to Kubernetes
 
 ## What is Kubernetes?

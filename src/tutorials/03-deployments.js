@@ -1,11 +1,11 @@
 const tutorial = {
-  id: 3,
-  slug: 'deployments-explained',
-  title: 'Deployments Explained',
-  description: 'Master Kubernetes Deployments',
-  duration: '20 min',
-  difficulty: 'Intermediate',
-  content: `
+    id: 3,
+    slug: 'deployments-explained',
+    title: 'Deployments Explained',
+    description: 'Master Kubernetes Deployments',
+    duration: '20 min',
+    difficulty: 'Intermediate',
+    content: `
 # Kubernetes Deployments
 
 ## What is a Deployment?

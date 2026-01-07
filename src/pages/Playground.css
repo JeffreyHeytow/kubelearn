@@ -1,0 +1,66 @@
+.nav-links span.active {
+    border-bottom: 3px solid white;
+    font-weight: bold;
+}
+
+.playground-page {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.playground-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.playground-container h1 {
+    color: white;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.playground-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    background: white;
+    border-radius: 10px;
+    padding: 2rem;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+}
+
+.editor-section,
+.guidance-section {
+    display: flex;
+    flex-direction: column;
+}
+
+.editor-section h3,
+.guidance-section h3 {
+    color: #667eea;
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+.guidance-section {
+    background: #f8f9ff;
+    padding: 1.5rem;
+    border-radius: 8px;
+    border: 2px solid #e0e6ff;
+}
+
+.guidance-content {
+    color: #333;
+    line-height: 1.8;
+}
+
+.guidance-content p {
+    margin-bottom: 1rem;
+}
+
+@media (max-width: 1024px) {
+    .playground-layout {
+        grid-template-columns: 1fr;
+    }
+}
