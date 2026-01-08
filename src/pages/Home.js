@@ -19,9 +19,9 @@ export default function Home() {
                         <h3>🎮 Practice</h3>
                         <p>Interactive YAML playground</p>
                     </div>
-                    <div className="feature" onClick={() => alert('AI Generator coming soon!')}>
+                    <div className="feature" onClick={() => navigate('/generator')}>
                         <h3>🤖 Generate</h3>
-                        <p>AI-powered config creation</p>
+                        <p>AI-powered YAML creation</p>
                     </div>
                 </div>
             </header>

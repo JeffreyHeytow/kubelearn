@@ -23,7 +23,10 @@ export default function Tutorials() {
                         className={location.pathname === '/playground' ? 'active' : ''}
                         onClick={() => navigate('/playground')}>Playground
                     </span>
-                    <span onClick={() => alert('Generator coming soon!')}>Generator</span>
+                    <span
+                        className={location.pathname === '/generator' ? 'active' : ''}
+                        onClick={() => navigate('/generator')}>Generator
+                    </span>
                 </div>
             </nav>
 

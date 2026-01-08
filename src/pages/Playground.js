@@ -426,8 +426,9 @@ export default function Playground() {
                     >
                         Playground
                     </span>
-                    <span onClick={() => alert('Generator coming soon!')}>
-                        Generator
+                    <span
+                        className={location.pathname === '/generator' ? 'active' : ''}
+                        onClick={() => navigate('/generator')}>Generator
                     </span>
                 </div>
             </nav>

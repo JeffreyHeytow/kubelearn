@@ -4,6 +4,7 @@ import Home from './pages/Home';
 import Tutorials from './pages/Tutorials';
 import Tutorial from './pages/Tutorial';
 import Playground from './pages/Playground';
+import Generator from './pages/Generator';
 import './App.css';
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
         <Route path="/tutorials" element={<Tutorials />} />
         <Route path="/tutorial/:slug" element={<Tutorial />} />
         <Route path="/playground" element={<Playground />} />
+        <Route path="/generator" element={<Generator />} />
       </Routes>
     </BrowserRouter>
   );
