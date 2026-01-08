@@ -148,7 +148,7 @@ export default function Tutorial() {
 
                         <button
                             className="nav-button playground-button"
-                            onClick={() => alert('Playground coming soon!')}
+                            onClick={() => navigate('/playground')}
                         >
                             Try the Playground 🎮
                         </button>
