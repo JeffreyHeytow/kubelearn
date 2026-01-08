@@ -68,9 +68,9 @@ ${input}
 Break down what each section does and why it matters. Be concise but thorough. Use clear formatting.`;
         }
 
-        // Call Gemini API with gemini-2.0-flash-exp model
+        // Call Gemini API with gemini-pro-latest model
         const response = await fetch(
-            `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent?key=${GEMINI_API_KEY}`,
+            `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro-latest:generateContent?key=${GEMINI_API_KEY}`,
             {
                 method: 'POST',
                 headers: {
