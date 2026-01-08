@@ -119,7 +119,7 @@ export default function Generator() {
             <div className="generator-container">
                 <div className="generator-header">
                     <h1>AI Kubernetes Assistant</h1>
-                    <p>Generate YAML configurations or get explanations powered by Claude AI</p>
+                    <p>Generate YAML configurations or get explanations powered by Gemini AI</p>
                 </div>
 
                 <div className="generator-content">
