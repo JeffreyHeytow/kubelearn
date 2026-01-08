@@ -1,15 +1,12 @@
-const { createClient } = require('@vercel/kv');
+const Redis = require('ioredis');
 
 // Configuration
 const REQUESTS_PER_IP_PER_DAY = 3;
 const GLOBAL_DAILY_LIMIT = 100;
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
 
-// Create KV client from REDIS_URL
-const kv = createClient({
-    url: process.env.REDIS_URL,
-    token: process.env.REDIS_URL
-});
+// Create Redis client
+const redis = new Redis(process.env.REDIS_URL);
 
 module.exports = async function handler(req, res) {
     // Only allow POST
@@ -20,11 +17,11 @@ module.exports = async function handler(req, res) {
     try {
         // Get client IP
         const ip = req.headers['x-forwarded-for']?.split(',')[0] || req.headers['x-real-ip'] || 'unknown';
-        const today = new Date().toISOString().split('T')[0]; // YYYY-MM-DD
+        const today = new Date().toISOString().split('T')[0];
 
         // Check global daily limit
         const globalKey = `global:${today}`;
-        const globalCount = parseInt(await kv.get(globalKey) || '0');
+        const globalCount = parseInt(await redis.get(globalKey) || '0');
 
         if (globalCount >= GLOBAL_DAILY_LIMIT) {
             return res.status(429).json({
@@ -35,7 +32,7 @@ module.exports = async function handler(req, res) {
 
         // Check IP-based limit
         const ipKey = `ip:${ip}:${today}`;
-        const ipCount = parseInt(await kv.get(ipKey) || '0');
+        const ipCount = parseInt(await redis.get(ipKey) || '0');
 
         if (ipCount >= REQUESTS_PER_IP_PER_DAY) {
             return res.status(429).json({
@@ -108,8 +105,8 @@ Break down what each section does and why it matters. Be concise but thorough. U
         result = result.replace(/```yaml\n?/g, '').replace(/```\n?/g, '').trim();
 
         // Increment counters (with 24-hour expiry)
-        await kv.set(ipKey, (ipCount + 1).toString(), { ex: 86400 });
-        await kv.set(globalKey, (globalCount + 1).toString(), { ex: 86400 });
+        await redis.setex(ipKey, 86400, (ipCount + 1).toString());
+        await redis.setex(globalKey, 86400, (globalCount + 1).toString());
 
         // Return success with usage info
         const remainingRequests = REQUESTS_PER_IP_PER_DAY - (ipCount + 1);
