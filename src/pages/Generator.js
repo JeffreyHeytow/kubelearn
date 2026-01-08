@@ -9,54 +9,7 @@ export default function Generator() {
     const [mode, setMode] = useState('generate');
     const [input, setInput] = useState('');
     const [output, setOutput] = useState('');
-    const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState('');
-    const [usage, setUsage] = useState({ remainingToday: 3, globalRemaining: 100 });
-
-    const handleGenerate = async () => {
-        if (!input.trim()) {
-            setError('Please enter a description or paste YAML code.');
-            return;
-        }
-
-        setIsLoading(true);
-        setError('');
-        setOutput('');
-
-        try {
-            const response = await fetch('/api/generate', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    mode,
-                    input
-                })
-            });
-
-            const data = await response.json();
-
-            if (!response.ok) {
-                if (response.status === 429) {
-                    // Rate limit hit
-                    setError(data.error);
-                } else {
-                    setError(data.error || 'Failed to generate response');
-                }
-                return;
-            }
-
-            setOutput(data.result);
-            setUsage(data.usage);
-
-        } catch (err) {
-            setError('Failed to connect to server. Please try again.');
-            console.error(err);
-        } finally {
-            setIsLoading(false);
-        }
-    };
 
     const handleCopy = () => {
         navigator.clipboard.writeText(output);
@@ -81,11 +34,6 @@ export default function Generator() {
         } else {
             return 'Paste your Kubernetes YAML here to get a detailed explanation...';
         }
-    };
-
-    const getButtonText = () => {
-        if (isLoading) return '⏳ Processing...';
-        return mode === 'generate' ? '🤖 Generate YAML' : '💡 Explain YAML';
     };
 
     return (
@@ -119,10 +67,29 @@ export default function Generator() {
             <div className="generator-container">
                 <div className="generator-header">
                     <h1>AI Kubernetes Assistant</h1>
-                    <p>Generate YAML configurations or get explanations powered by Gemini AI</p>
+                    <p>Generate YAML configurations or get explanations powered by Google Gemini AI</p>
                 </div>
 
                 <div className="generator-content">
+                    {/* AI Limitation Notice */}
+                    <div className="ai-notice">
+                        <div className="notice-icon">⚠️</div>
+                        <div className="notice-content">
+                            <strong>AI Generation Temporarily Disabled</strong>
+                            <p>
+                                This feature is fully functional but disabled in the live demo due to infrastructure constraints.
+                                Google's Gemini API responses can take 15-20 seconds, exceeding Vercel's 10-second free tier timeout limit.
+                            </p>
+                            <p>
+                                The complete implementation includes: rate-limited API calls (3 per IP/day, 100 global/day),
+                                Redis-based request tracking, and secure environment variable management.
+                                <a href="https://github.com/JeffreyHeytow/kubelearn/blob/main/api/generate.js" target="_blank" rel="noopener noreferrer">
+                                    View the code →
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+
                     {/* Mode selector */}
                     <div className="mode-selector">
                         <label htmlFor="mode">Mode:</label>
@@ -139,12 +106,6 @@ export default function Generator() {
                             <option value="generate">Generate YAML</option>
                             <option value="explain">Explain YAML</option>
                         </select>
-
-                        <div className="usage-info">
-                            <span className="usage-badge">
-                                {usage.remainingToday} requests left today
-                            </span>
-                        </div>
                     </div>
 
                     {/* Input area */}
@@ -161,17 +122,17 @@ export default function Generator() {
                         />
                         <button
                             className="generate-button"
-                            onClick={handleGenerate}
-                            disabled={isLoading}
+                            onClick={() => setError('AI generation is disabled in this demo. See banner above for details.')}
+                            disabled={true}
                         >
-                            {getButtonText()}
+                            {mode === 'generate' ? '🤖 Generate YAML (Disabled - See Above)' : '💡 Explain YAML (Disabled - See Above)'}
                         </button>
                     </div>
 
                     {/* Error message */}
                     {error && (
                         <div className="error-message">
-                            ❌ {error}
+                            ℹ️ {error}
                         </div>
                     )}
 
