@@ -1,24 +1,29 @@
 .playground-page {
-    min-height: 100vh;
+    height: 100vh;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    padding-bottom: 2rem;
-    overflow-x: hidden;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
 }
 
 .playground-container {
     max-width: 1400px;
+    width: 100%;
     margin: 0 auto;
-    padding: 2rem;
-    max-height: 100vh;
+    padding: 1.5rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
     overflow: hidden;
 }
 
 .level-header {
     background: white;
-    padding: 1rem 1.5rem;
+    padding: 0.75rem 1.5rem;
     border-radius: 10px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    margin-bottom: 1rem;
+    margin-bottom: 0.75rem;
+    flex-shrink: 0;
 }
 
 .level-title {
@@ -31,7 +36,7 @@
 .level-header h1 {
     color: #667eea;
     margin: 0;
-    font-size: 1.4rem;
+    font-size: 1.3rem;
 }
 
 .progress {
@@ -46,19 +51,20 @@
 .level-description {
     color: #666;
     margin: 0;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
 }
 
 /* Feedback Panel at Top */
 .feedback-panel {
     background: white;
-    padding: 1rem 1.5rem;
+    padding: 0.75rem 1.5rem;
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    margin-bottom: 1rem;
-    min-height: 60px;
+    margin-bottom: 0.75rem;
+    min-height: 50px;
     display: flex;
     align-items: center;
+    flex-shrink: 0;
 }
 
 .feedback-panel.success {
@@ -78,8 +84,8 @@
 
 .feedback-panel p {
     margin: 0;
-    font-size: 0.95rem;
-    line-height: 1.5;
+    font-size: 0.9rem;
+    line-height: 1.4;
     color: #333;
     flex: 1;
 }
@@ -92,7 +98,7 @@
 }
 
 .complete-icon {
-    font-size: 2rem;
+    font-size: 1.5rem;
 }
 
 .complete-text {
@@ -102,24 +108,24 @@
 .complete-text strong {
     display: block;
     color: #4caf50;
-    font-size: 1.1rem;
+    font-size: 1rem;
     margin-bottom: 0.25rem;
 }
 
 .complete-text p {
     margin: 0;
     color: #666;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
 }
 
 .next-button {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
     border: none;
-    padding: 0.75rem 1.5rem;
+    padding: 0.6rem 1.25rem;
     border-radius: 6px;
     cursor: pointer;
-    font-size: 1rem;
+    font-size: 0.9rem;
     font-weight: bold;
     transition: all 0.3s;
     white-space: nowrap;
@@ -130,14 +136,14 @@
     box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
 }
 
-/* Game Layout - FIXED HEIGHT */
+/* Game Layout */
 .game-layout {
     display: grid;
     grid-template-columns: 1fr 400px;
     gap: 1.5rem;
-    height: calc(100vh - 400px);
-    max-height: 500px;
-    min-height: 400px;
+    flex: 1;
+    min-height: 0;
+    overflow: hidden;
 }
 
 /* Left side: Code Editor */
@@ -148,7 +154,7 @@
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
     display: flex;
     flex-direction: column;
-    height: 100%;
+    min-height: 0;
 }
 
 .editor-header {
@@ -170,6 +176,7 @@
     font-family: 'Courier New', monospace;
     font-size: 0.9rem;
     line-height: 1.6;
+    min-height: 0;
 }
 
 .editor-line {
@@ -228,7 +235,7 @@
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
     display: flex;
     flex-direction: column;
-    height: 100%;
+    min-height: 0;
 }
 
 .blocks-header {
@@ -249,6 +256,7 @@
     flex-direction: column;
     gap: 0.5rem;
     align-items: flex-start;
+    min-height: 0;
 }
 
 .code-block {
@@ -361,13 +369,10 @@
 @media (max-width: 1024px) {
     .game-layout {
         grid-template-columns: 1fr;
-        height: auto;
-        max-height: none;
     }
 
     .editor-zone,
     .blocks-zone {
         min-height: 300px;
-        height: auto;
     }
 }

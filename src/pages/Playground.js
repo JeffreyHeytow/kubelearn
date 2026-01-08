@@ -272,35 +272,78 @@ export default function Playground() {
     };
 
     // Generate contextual hint
+    // Generate contextual hint
     const getHint = (line, targetPosition) => {
         const correctPosition = line.position + 1; // +1 for 1-indexed display
+        const currentCode = line.code.trim();
 
-        if (line.position === 0) {
-            return "💡 Hint: This should be the very first line at the top.";
-        } else if (line.position === 1) {
-            return "💡 Hint: This should be the second line, right after apiVersion.";
-        } else if (line.code.includes("metadata:")) {
-            return "💡 Hint: This should come after 'kind', before any indented fields.";
-        } else if (line.code.includes("name:") && line.indent === 2) {
-            return "💡 Hint: This should be indented under 'metadata'.";
-        } else if (line.code.includes("spec:")) {
-            return "💡 Hint: This should come after the metadata section.";
-        } else if (line.code.includes("containers:")) {
-            return "💡 Hint: This should be indented under 'spec'.";
-        } else if (line.code.startsWith("- name:")) {
-            return "💡 Hint: This starts a container list item, should be under 'containers:'.";
-        } else if (line.code.includes("image:") && line.indent === 4) {
-            return "💡 Hint: This should be indented under the container name.";
-        } else if (line.code.includes("resources:")) {
-            return "💡 Hint: This should be at the same indent level as 'image:'.";
-        } else if (line.code.includes("requests:") || line.code.includes("limits:")) {
-            return "💡 Hint: This should be indented under 'resources:'.";
-        } else {
-            // Generic hint
-            if (targetPosition < line.position) {
-                return `💡 Hint: Try placing this further down in the file (around line ${correctPosition}).`;
+        // Very specific hints based on exact code content
+        if (currentCode === "apiVersion: v1") {
+            return "💡 Hint: 'apiVersion' is always the very first line in a Kubernetes YAML file.";
+        }
+
+        if (currentCode === "kind: Pod") {
+            return "💡 Hint: 'kind' comes right after 'apiVersion' to specify what type of resource you're creating.";
+        }
+
+        if (currentCode === "metadata:") {
+            return "💡 Hint: 'metadata:' comes after 'kind' and before the indented name field.";
+        }
+
+        if (currentCode === "name: my-pod" && line.indent === 2) {
+            return "💡 Hint: This 'name' field belongs under 'metadata:' and should be indented with 2 spaces. It identifies your Pod.";
+        }
+
+        if (currentCode === "spec:") {
+            return "💡 Hint: 'spec:' comes after the metadata section. It defines what your Pod should actually run.";
+        }
+
+        if (currentCode === "containers:") {
+            return "💡 Hint: 'containers:' goes under 'spec:' with 2 spaces indent. It starts the list of containers to run.";
+        }
+
+        if (currentCode === "- name: nginx") {
+            return "💡 Hint: This line starts a container definition. The dash (-) makes it a list item under 'containers:', with 2 spaces before the dash.";
+        }
+
+        if (currentCode === "image: nginx:1.21" && line.indent === 4) {
+            return "💡 Hint: The 'image' field tells Kubernetes which container image to use. It should be indented 4 spaces (under the container name).";
+        }
+
+        if (currentCode === "resources:") {
+            return "💡 Hint: 'resources:' defines CPU and memory limits. It goes at the same indent level as 'image:' (4 spaces).";
+        }
+
+        if (currentCode === "requests:") {
+            return "💡 Hint: 'requests:' specifies the minimum resources guaranteed to the container. It goes under 'resources:' with 6 spaces indent.";
+        }
+
+        if (currentCode.includes("memory:") && currentCode.includes("64Mi")) {
+            return "💡 Hint: This memory request should be under 'requests:' with 8 spaces indent.";
+        }
+
+        if (currentCode.includes("cpu:") && currentCode.includes("250m")) {
+            return "💡 Hint: This CPU request should be under 'requests:' with 8 spaces indent, after the memory line.";
+        }
+
+        // Fallback: directional hint
+        if (targetPosition < line.position) {
+            const distance = line.position - targetPosition;
+            if (distance === 1) {
+                return `💡 Hint: Try the next line down.`;
+            } else if (distance <= 3) {
+                return `💡 Hint: This line belongs a few lines further down in the file.`;
             } else {
-                return `💡 Hint: Try placing this further up in the file (around line ${correctPosition}).`;
+                return `💡 Hint: This line belongs much further down (near line ${correctPosition}).`;
+            }
+        } else {
+            const distance = targetPosition - line.position;
+            if (distance === 1) {
+                return `💡 Hint: Try the line above this one.`;
+            } else if (distance <= 3) {
+                return `💡 Hint: This line belongs a few lines further up in the file.`;
+            } else {
+                return `💡 Hint: This line belongs much further up (near line ${correctPosition}).`;
             }
         }
     };
