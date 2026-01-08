@@ -1,4 +1,4 @@
-import { createClient } from '@vercel/kv';
+const { createClient } = require('@vercel/kv');
 
 // Configuration
 const REQUESTS_PER_IP_PER_DAY = 3;
@@ -11,7 +11,7 @@ const kv = createClient({
     token: process.env.REDIS_URL
 });
 
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
     // Only allow POST
     if (req.method !== 'POST') {
         return res.status(405).json({ error: 'Method not allowed' });
@@ -126,4 +126,4 @@ Break down what each section does and why it matters. Be concise but thorough. U
         console.error('Server error:', error);
         return res.status(500).json({ error: 'Internal server error' });
     }
-}
+};
